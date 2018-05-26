@@ -29,17 +29,17 @@ public class TxExample {
             String sql1 = "insert into employee values(106, 20, 'Rita', 'Taz')";
             stmt.executeUpdate(sql1);
 
-            //assume the id is duplicated
+            //假设主键冲突了
             String Sql2 = "insert into employee values(106, 22, 'Sita', 'Singh')";
             stmt.executeUpdate(Sql2);
 
-            //if there is no error
+            //如果一切正常, 就提交事务
             conn.commit();
         } catch (ClassNotFoundException e) {
             //handle errors for Class.forName
             e.printStackTrace();
         } catch (SQLException e) {
-            //if there is any error
+            //如果出现异常则回滚事务
             if (Objects.nonNull(conn)) {
                 try {
                     conn.rollback();
